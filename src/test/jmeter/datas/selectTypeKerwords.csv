@@ -1,0 +1,4 @@
+TestcaseId,Description,keywords
+test001,这里只用来描述用例是用来做什么事情的,"weather,query"
+test002,这里只用来描述用例是用来做什么事情的,"word,query"
+test003,这里只用来描述用例是用来做什么事情的,"weather,query,word"

@@ -1,0 +1,321 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="Author" content="shanhe.me"><title>接口自动化测试报告</title><style type="text/css">
+            
+                * { margin: 0; padding: 0 }
+                html, body { width: 100%; height: 100%; background: #dee4ea; font-size: 12px }
+                table { border: none; border-collapse: collapse; table-layout: fixed;}
+                td { vertical-align: baseline; font-size: 12px }
+                
+				
+				table tr td, table tr th {
+					font-size: 12px;
+				}
+				table.details tr th{
+				    color: #ffffff;
+					font-weight: bold;
+					text-align:center;
+					background:#2674a6;
+					white-space: nowrap;
+				}
+				table.details tr td{
+					background:#eeeee0;
+					white-space: nowrap;
+				}
+				
+				h1 {
+					margin: 0px 0px 5px; font: bold 135% verdana,arial,helvetica
+				}
+				h2 {
+					margin-top: 1em; margin-bottom: 0.5em; font: bold 125% verdana,arial,helvetica
+				}
+				h3 {
+					margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica
+				}
+				.Failure {
+					font-weight:bold; color:red;
+				}
+				
+				#left-panel { position: absolute; right: 0; top: 137px; bottom: 0; left: 0px;  padding:auto; width: 300px; overflow: auto; background: #dee4ea }
+                #left-panel li.navigation { font-weight: bold; cursor: default; color: #9da8b2; line-height: 18px; background-position: 12px 5px; background-repeat: no-repeat; padding: 0 0 0 25px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAICAYAAAArzdW1AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBQqGbO7BEcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAKRJREFUGNN1zM0KgkAYheF3RvtXSsGyWhRNaILS7bdt11W0KgJvoPwZp0UlBPUtz3nOJw7Hk7necv5dOA2Qaazo2vZP0LEt9olCVtqQROufKNmuqBuBNAYW4QzXGX6B0bDPcjGnMQYJ8Cg12U59oSzaUJQa4IUAXMclDHwAAn/MxPMw765FZd2QRgopBWmsKCrdfhXnS/4ZYElBXdyxewN008Y8AephLAkqz613AAAAAElFTkSuQmCC) }
+                #left-panel li.success { color: #565b60 }
+                #left-panel li.failure { color: red }
+                #left-panel li { list-style: none; color: black; cursor: pointer }
+                #left-panel li.selected { background-repeat: repeat-x; color: white; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAUCAYAAABMDlehAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBQxLTs5O2gAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAEdJREFUCNc1y7ERgEAMA0GNUhIyGqM2uqKgtyWZhE9v53A/7/A6D7BkMDNgy2AroB2wHTCZv5UMOgFLG1bvd7XBckBlwCXjA5wMOF5iOX/MAAAAAElFTkSuQmCC) }
+                #left-panel div { line-height: 20px; background-position: 25px 3px; background-repeat: no-repeat; padding: 0 0 0 45px }
+                #left-panel div.success { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBULEEc6wzcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAiNJREFUKM99kktIVGEYhp/jzJl08lI6logp2Y2EFkbtaqlFROsWrlq4ioJWQRs37VoUVItWkYEVRGSBlhleCpywDEWxTEuxcURTZ6YzxzP/5WshCOHUt36f93kXnyMi5Lsnb4clI4s4fhkXzp5w8mWcfHBvfEpUxVdCUUU6lUPNHuD86cYtBQX5GhPrM7hRg7GaSDRg2vuUd90WuOPVsOyqy6FFo2yOQHlU1S9z9dZT+S/8I7GCLlkAN4eyAf56mnT6Fy1HLnGuuYa++MS/4e74qMRqfXLaJ9BpfnsrLC0m2BYuoqwUbj/+274JD43OEqmexwvW8NUKXnaZtVSS1pNtAAyOvyC6v48HnUNb4Z7PH8UtTlIQWA5tb2RhYY7kz3l2FleytJYg/qWb8t2KZ/0PN+1hgI6uEUr2jpHKpGlquExVaS0VbjUZL7WxaqIXK6ADQ0n9GNfv9XCttWnD/O57t0TKFklnF3g5fJ/seoaa2D4O1x0F4PlgO9oIftbgFgYMfLgjACGqj0vlsddoUnj+Kt/mxunq72RP+UGqYjWMTA7R+b6dUCSEGEF5hoJQip6BaFs4HJtCyRrKs6wHCovDip/kys0WWpovMpOYBCtoT2N9B5uzWG0Zid8gnFrVFEQDtBaUrxEgXBimaEeER2/uIiK4roPOaMRYjBKsFly3fOO3G06dETGCWIsYjckprMphtEKMAQtgsMYi1mJMQHJ6xvkDKQoyphCzkl0AAAAASUVORK5CYII=) }
+                #left-panel div.failure { background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAYAAADwikbvAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBUJOEC5CU8AAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAAeVJREFUKM+NkDtok2EUhp8vl9ZLo/EyKI6KFgqCKC4OClrBWUQEcRRx1cGpk3WyInWrgoMZKkW8thYaEYQ0i7WC2ngrNDTERHJvkv/L/3//dxwc7F8jeOAsh/c973OOEhG61aPnaen7maXYt4MLZ4+pbppQt+F06jNH3QWOb8pxUs+SmJzjv83hxY8SVy3wNdtVneiHqe54IhLoB4/TUkyMyOrKj5yXoVtPZK02kLyYK7OnlqFWzgcCGtUC/YUJ3n5a/jd28tU7ORTN0myUA6Jms8bpWIa798elqzn1fokjThrpVBC3ETzNbYAuca59j/Hp+b/N869Tsk8tgVMCXQk+RlfQuk1/tMLMwzsSMCcm5zjhvoR2AdpF0GuwO4aqttS05ZSbZHhsBoAIwI83Cdkd/460XDAOG02d24MxvlR8dsUUh3f2UHaEtgdbWCHz4oZwcVCp66PP5FLhKjEc8DXaCMsNy8DYn/SnZ+L0hhWOb/F8yLs9fDtwk8j+VpqwrlC34PrgGEu2bhlYhZ1b8dncq3AMeBaUr/k6NUyk4ChKzu+N2hc6Bqody+WDG8g2fLatD7F3axjPgmvAtYJvIbouhhIRrl0ZktnkBGIt1gqeMXQ8D2MMiCIUCqFEsFhEQMSykCuqX0MzLAUJTzRsAAAAAElFTkSuQmCC) }
+                #left-panel div.detail { display: none }
+                #right-panel {position: absolute; right: 0; top: 137px; bottom: 0; left: 301px; padding:auto;  overflow: auto; background: white }
+                #right-panel .group { font-size: 12px; font-weight: bold; line-height: 16px; padding: 0 0 0 18px; counter-reset: assertion; background-repeat: repeat-x; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAQCAYAAADXnxW3AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBUkDq8pxjkAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAADdJREFUCNdVxrERwDAMAzGK0v47eS6Z927SpMFBAAbkvSvnRk5+7K5cVfLMyN39bWakJAjA5xw9R94jN3tVhVEAAAAASUVORK5CYII=) }
+                #right-panel .zebra { background-repeat: repeat; padding: 0 0 0 18px; background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAAmCAYAAAAFvPEHAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9sDEBYWFlNztEcAAAAdaVRYdENvbW1lbnQAAAAAAENyZWF0ZWQgd2l0aCBHSU1QZC5lBwAAABdJREFUCNdjYKAtePv5338mBgYGBpoQAGy1BAJlb/y6AAAAAElFTkSuQmCC) }
+                #right-panel .data { line-height: 19px; white-space: nowrap }
+                #right-panel pre.data { white-space: pre }
+                #right-panel tbody.failure { color: red }
+                #right-panel td.key { min-width: 108px }
+                #right-panel td.delimiter { min-width: 18px }
+                #right-panel td.assertion:before { counter-increment: assertion; content: counter(assertion) ". " }
+                #right-panel td.assertion { color: black }
+                #right-panel .trail { border-top: 1px solid #b4b4b4 }
+                #right-panel pre{
+					width:1000px;
+					white-space: pre-wrap;       
+					white-space: -moz-pre-wrap;  
+					white-space: -pre-wrap;      
+					white-space: -o-pre-wrap;    
+					word-wrap: break-word;  
+					}
+
+            </style><script type="text/javascript">
+            
+                var onclick_li = (function() {
+                    var last_selected = null;
+                    return function(li) {
+                        if( last_selected == li )
+                            return;
+                        if( last_selected )
+                            last_selected.className = "";
+                        last_selected = li;
+                        last_selected.className = "selected";
+                        document.getElementById("right-panel").innerHTML = last_selected.firstChild.nextSibling.innerHTML;
+                        return false;
+                    };
+                })();
+                
+                var patch_timestamp = function() {
+                    var spans = document.getElementsByTagName("span");
+                    var len = spans.length;
+                    for( var i = 0; i < len; ++i ) {
+                        var span = spans[i];
+                        if( "patch_timestamp" == span.className )
+                            span.innerHTML = new Date( parseInt( span.innerHTML ) );
+                    }
+                };
+                
+                var patch_navigation_class = (function() {
+                
+                    var set_class = function(el, flag) {
+                        if(el) {
+                            el.className += flag ? " success" : " failure";
+                        }
+                    };
+                
+                    var traverse = function(el, group_el, flag) {
+                        while(1) {
+                            if(el) {
+                                if(el.className == 'navigation') {
+                                    set_class(group_el, flag);
+                                    group_el = el;
+                                    flag = true;
+                                } else {
+                                    var o = el.firstChild;
+                                    o = o ? o.className : null;
+                                    flag = flag ? (o == 'success') : false;
+                                }
+                                el = el.nextSibling;
+                            } else {
+                                set_class(group_el, flag);
+                                break;
+                            }
+                        }
+                    };
+                    
+                    return function() {
+                        var o = document.getElementById("result-list");
+                        o = o ? o.firstChild : null;
+                        if(o)
+                            traverse(o, null, true);
+                    };
+                })();
+        
+                window.onload = function() {
+                    patch_timestamp();
+                    patch_navigation_class();
+                    var o = document.getElementById("result-list");
+                    o = o ? o.firstChild : null;
+                    o = o ? o.nextSibling : null;
+                    if(o)
+                        onclick_li(o);
+                };
+        
+            </script></head><body><div><div><table width="100%"><tr><td align="left"><h1>接口自动化测试报告</h1></td><td align="right">
+					Date report:
+					date not defined</td></tr></table><hr size="1"><h2>Summary</h2><table align="center" class="details" border="0" cellpadding="5" cellspacing="2" width="95%" style="margin:auto"><tr valign="top"><th># Samples</th><th>Failures</th><th>Success Rate</th><th>Average Time</th><th>Min Time</th><th>Max Time</th></tr><tr valign="top" class=""><td align="center">10</td><td align="center">0</td><td align="center">100.00%</td><td align="center">908 ms</td><td align="center">0 ms</td><td align="center">3395 ms</td></tr></table><hr size="2"><h2>Detail</h2></div><div id="left-panel"><ol id="result-list"><li class="navigation">
+										Thread:
+										关键字驱动 1-1</li><li onclick="return onclick_li(this);"><div class="success">weather,query</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253276602</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">0
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">0
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data"> </pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">weather</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253276684</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">2553
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">2552
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">809</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET http://api.qingyunke.com/api.php?key=free&amp;appid=0&amp;msg=深圳天气</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: api.qingyunke.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Date: Thu, 01 Apr 2021 05:01:16 GMT
+Server: Apache/2.4.37
+X-Powered-By: PHP/5.6.38
+Expires: Mon,26Jul199705:00:00GMT
+Pragma: no-cache
+Vary: Accept-Encoding,User-Agent
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=utf-8
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"result":0,"content":"深圳天气 ：当前温度27℃，感冒低发期，天气舒适，请注意多吃蔬菜水果，多喝水哦。{br}[04月01日] ：多云，低温 25℃，高温 31℃，风力3级{br}[04月02日] ：多云，低温 25℃，高温 31℃，风力2级{br}[04月03日] ：晴，低温 25℃，高温 32℃，风力2级{br}[04月04日] ：多云，低温 25℃，高温 32℃，风力2级{br}[04月05日] ：多云，低温 22℃，高温 29℃，风力3级"}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">query</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253279239</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">2542
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">2542
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">2029</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET https://www.kuaidi100.com/query?type=shunfeng&amp;postid=10000</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: www.kuaidi100.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:21 GMT
+Content-Type: text/html;charset=UTF-8
+Content-Length: 1749
+Connection: keep-alive
+Vary: Accept-Encoding
+P3P: CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+Cache-Control: no-cache
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"message":"ok","nu":"10000","ischeck":"0","condition":"H100","com":"shunfeng","status":"200","state":"5","data":[{"time":"2021-04-01 08:59:52","ftime":"2021-04-01 08:59:52","context":"【广东省江门市恩平市公司】 派件中 派件人: 梁添强 电话 13211264712 。 圆通快递小哥每天已测体温，请放心收寄快递 如有疑问，请联系：0750-7119199","location":""},{"time":"2021-04-01 08:50:08","ftime":"2021-04-01 08:50:08","context":"【广东省江门市恩平市公司】 已收入","location":""},{"time":"2021-03-31 11:27:48","ftime":"2021-03-31 11:27:48","context":"【江门转运中心】 已发出","location":""},{"time":"2021-03-31 10:37:48","ftime":"2021-03-31 10:37:48","context":"【江门转运中心公司】 已收入","location":""},{"time":"2021-03-31 05:21:21","ftime":"2021-03-31 05:21:21","context":"【佛山转运中心】 已发出 下一站 【江门转运中心公司】","location":""},{"time":"2021-03-31 05:19:19","ftime":"2021-03-31 05:19:19","context":"【佛山转运中心公司】 已收入","location":""},{"time":"2021-03-31 03:17:09","ftime":"2021-03-31 03:17:09","context":"【广东省广州市南沙区东涌】 已发出 下一站 【佛山转运中心公司】","location":""},{"time":"2021-03-31 02:05:57","ftime":"2021-03-31 02:05:57","context":"【广东省广州市南沙区东涌公司】 已打包","location":""},{"time":"2021-03-31 02:05:45","ftime":"2021-03-31 02:05:45","context":"【广东省广州市南沙区东涌公司】 已收件 取件人: 张悦 (18521197069)","location":""},{"time":"2021-03-29 19:02:05","ftime":"2021-03-29 19:02:05","context":"【广东省佛山市顺德区勒流公司】 已收件 取件人: 田磊康 (18924576950)","location":""}]}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">word,query</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253281782</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">0
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">0
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data"> </pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">word</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253281782</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">86
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">86
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">1147</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET http://dict-co.iciba.com/search.php?word=sss&amp;submit=提交</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: dict-co.iciba.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:22 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Powered-By: PHP/5.5.24
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+  &lt;head&gt;
+
+  
+  &lt;meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /&gt;
+  &lt;meta http-equiv="Cache-Control" content="no-cache" /&gt;
+  &lt;meta name="HandheldFriendly" content="true" /&gt;
+  
+  
+  &lt;meta name="keywords" content="英语,学习,翻译"  /&gt;
+  
+    &lt;title&gt;爱词霸 翻译&lt;/title&gt;    
+   
+
+    
+  &lt;/head&gt;
+&lt;body&gt;
+&lt;br&gt;
+&lt;img height="20" width="90" alt="爱词霸" src="iciba_LOGO.gif"/&gt;&lt;br&gt;&lt;br&gt;
+abbr.&amp;nbsp;&amp;nbsp;stratum super stratum （Latin=layer upon layer） （拉丁语）层叠&amp;nbsp;&amp;nbsp;specific soluble substance 特异性可溶性物质&amp;nbsp;&amp;nbsp;single-screw ship 单螺旋桨船&amp;nbsp;&amp;nbsp;sterile saline soak 无茵盐水浸泡&amp;nbsp;&amp;nbsp;&lt;br /&gt;
+
+&lt;br /&gt;&lt;br /&gt;&lt;a href="/"&gt;返回查词首页&lt;/a&gt;	
+&lt;/body&gt;
+&lt;/html&gt;
+	</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">query</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253281868</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">209
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">209
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">479</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET https://www.kuaidi100.com/query?type=shunfeng&amp;postid=10000</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: www.kuaidi100.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:22 GMT
+Content-Type: text/html;charset=UTF-8
+Content-Length: 200
+Connection: keep-alive
+Vary: Accept-Encoding
+P3P: CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+Cache-Control: no-cache
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"message":"ok","nu":"10000","ischeck":"1","com":"shunfeng","status":"200","condition":"F00","state":"3","data":[{"time":"2021-03-08 13:01:22","context":"查无结果","ftime":"2021-03-08 13:01:22"}]}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">weather,query,word</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253282077</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">1
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">0
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data"> </pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">weather</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253282078</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">3395
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">3395
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">809</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET http://api.qingyunke.com/api.php?key=free&amp;appid=0&amp;msg=深圳天气</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: api.qingyunke.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Date: Thu, 01 Apr 2021 05:01:22 GMT
+Server: Apache/2.4.37
+X-Powered-By: PHP/5.6.38
+Expires: Mon,26Jul199705:00:00GMT
+Pragma: no-cache
+Vary: Accept-Encoding,User-Agent
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=utf-8
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"result":0,"content":"深圳天气 ：当前温度27℃，感冒低发期，天气舒适，请注意多吃蔬菜水果，多喝水哦。{br}[04月01日] ：多云，低温 25℃，高温 31℃，风力3级{br}[04月02日] ：多云，低温 25℃，高温 31℃，风力2级{br}[04月03日] ：晴，低温 25℃，高温 32℃，风力2级{br}[04月04日] ：多云，低温 25℃，高温 32℃，风力2级{br}[04月05日] ：多云，低温 22℃，高温 29℃，风力3级"}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">query</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253285474</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">207
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">207
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">514</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET https://www.kuaidi100.com/query?type=shunfeng&amp;postid=10000</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: www.kuaidi100.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:25 GMT
+Content-Type: text/html;charset=UTF-8
+Content-Length: 235
+Connection: keep-alive
+Vary: Accept-Encoding
+P3P: CP="IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT"
+Cache-Control: no-cache
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">{"message":"ok","nu":"10000","ischeck":"0","condition":"B00","com":"shunfeng","status":"200","state":"1","data":[{"time":"2021-04-01 10:35:38","ftime":"2021-04-01 10:35:38","context":"揽收任务已分配给梁平为","location":""}]}</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li><li onclick="return onclick_li(this);"><div class="success">word</div><div class="detail"><div class="group">Sampler</div><div class="zebra"><table><tr><td class="data key">Thread Name</td><td class="data delimiter">:</td><td class="data">关键字驱动 1-1</td></tr><tr><td class="data key">Timestamp</td><td class="data delimiter">:</td><td class="data"><span class="patch_timestamp">1617253285681</span></td></tr><tr><td class="data key">Time</td><td class="data delimiter">:</td><td class="data">84
+														ms
+													</td></tr><tr><td class="data key">Latency</td><td class="data delimiter">:</td><td class="data">84
+														ms
+													</td></tr><tr><td class="data key">Bytes</td><td class="data delimiter">:</td><td class="data">1147</td></tr><tr><td class="data key">Sample Count</td><td class="data delimiter">:</td><td class="data">1</td></tr><tr><td class="data key">Error Count</td><td class="data delimiter">:</td><td class="data">0</td></tr><tr><td class="data key">Response Code</td><td class="data delimiter">:</td><td class="data">200</td></tr><tr><td class="data key">Response Message</td><td class="data delimiter">:</td><td class="data">OK</td></tr></table></div><div class="trail"></div><div class="group">Request</div><div class="zebra"><table><tr><td class="data key">Method/Url</td><td class="data delimiter">:</td><td class="data"><pre class="data">GET http://dict-co.iciba.com/search.php?word=sss&amp;submit=提交</pre></td></tr><tr><td class="data key">Query String</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Cookies</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr><tr><td class="data key">Request Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">Connection: keep-alive
+Host: dict-co.iciba.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</pre></td></tr></table></div><div class="trail"></div><div class="group">Response</div><div class="zebra"><table><tr><td class="data key">Response Headers</td><td class="data delimiter">:</td><td class="data"><pre class="data">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:25 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Powered-By: PHP/5.5.24
+</pre></td></tr><tr><td class="data key">Response Data</td><td class="data delimiter">:</td><td class="data"><pre class="data">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+  &lt;head&gt;
+
+  
+  &lt;meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /&gt;
+  &lt;meta http-equiv="Cache-Control" content="no-cache" /&gt;
+  &lt;meta name="HandheldFriendly" content="true" /&gt;
+  
+  
+  &lt;meta name="keywords" content="英语,学习,翻译"  /&gt;
+  
+    &lt;title&gt;爱词霸 翻译&lt;/title&gt;    
+   
+
+    
+  &lt;/head&gt;
+&lt;body&gt;
+&lt;br&gt;
+&lt;img height="20" width="90" alt="爱词霸" src="iciba_LOGO.gif"/&gt;&lt;br&gt;&lt;br&gt;
+abbr.&amp;nbsp;&amp;nbsp;stratum super stratum （Latin=layer upon layer） （拉丁语）层叠&amp;nbsp;&amp;nbsp;specific soluble substance 特异性可溶性物质&amp;nbsp;&amp;nbsp;single-screw ship 单螺旋桨船&amp;nbsp;&amp;nbsp;sterile saline soak 无茵盐水浸泡&amp;nbsp;&amp;nbsp;&lt;br /&gt;
+
+&lt;br /&gt;&lt;br /&gt;&lt;a href="/"&gt;返回查词首页&lt;/a&gt;	
+&lt;/body&gt;
+&lt;/html&gt;
+	</pre></td></tr><tr><td class="data key">Response File</td><td class="data delimiter">:</td><td class="data"><pre class="data"></pre></td></tr></table></div><div class="trail"></div></div></li></ol></div><div id="right-panel"></div></div></body></html>

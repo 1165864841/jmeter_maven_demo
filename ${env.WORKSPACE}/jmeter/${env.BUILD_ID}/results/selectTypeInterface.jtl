@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testResults version="1.2">
+<sample t="0" it="0" lt="0" ct="0" ts="1617253276602" s="true" lb="weather,query" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String"></responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String"></responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <samplerData class="java.lang.String"></samplerData>
+</sample>
+<httpSample t="2553" it="0" lt="2552" ct="53" ts="1617253276684" s="true" lb="weather" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="809" sby="186" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 01 Apr 2021 05:01:16 GMT
+Server: Apache/2.4.37
+X-Powered-By: PHP/5.6.38
+Expires: Mon,26Jul199705:00:00GMT
+Pragma: no-cache
+Vary: Accept-Encoding,User-Agent
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=utf-8
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: api.qingyunke.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;result&quot;:0,&quot;content&quot;:&quot;深圳天气 ：当前温度27℃，感冒低发期，天气舒适，请注意多吃蔬菜水果，多喝水哦。{br}[04月01日] ：多云，低温 25℃，高温 31℃，风力3级{br}[04月02日] ：多云，低温 25℃，高温 31℃，风力2级{br}[04月03日] ：晴，低温 25℃，高温 32℃，风力2级{br}[04月04日] ：多云，低温 25℃，高温 32℃，风力2级{br}[04月05日] ：多云，低温 22℃，高温 29℃，风力3级&quot;}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://api.qingyunke.com/api.php?key=free&amp;appid=0&amp;msg=深圳天气</java.net.URL>
+</httpSample>
+<httpSample t="2542" it="0" lt="2542" ct="2501" ts="1617253279239" s="true" lb="query" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="2029" sby="153" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:21 GMT
+Content-Type: text/html;charset=UTF-8
+Content-Length: 1749
+Connection: keep-alive
+Vary: Accept-Encoding
+P3P: CP=&quot;IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT&quot;
+Cache-Control: no-cache
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: www.kuaidi100.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;message&quot;:&quot;ok&quot;,&quot;nu&quot;:&quot;10000&quot;,&quot;ischeck&quot;:&quot;0&quot;,&quot;condition&quot;:&quot;H100&quot;,&quot;com&quot;:&quot;shunfeng&quot;,&quot;status&quot;:&quot;200&quot;,&quot;state&quot;:&quot;5&quot;,&quot;data&quot;:[{&quot;time&quot;:&quot;2021-04-01 08:59:52&quot;,&quot;ftime&quot;:&quot;2021-04-01 08:59:52&quot;,&quot;context&quot;:&quot;【广东省江门市恩平市公司】 派件中 派件人: 梁添强 电话 13211264712 。 圆通快递小哥每天已测体温，请放心收寄快递 如有疑问，请联系：0750-7119199&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-04-01 08:50:08&quot;,&quot;ftime&quot;:&quot;2021-04-01 08:50:08&quot;,&quot;context&quot;:&quot;【广东省江门市恩平市公司】 已收入&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-03-31 11:27:48&quot;,&quot;ftime&quot;:&quot;2021-03-31 11:27:48&quot;,&quot;context&quot;:&quot;【江门转运中心】 已发出&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-03-31 10:37:48&quot;,&quot;ftime&quot;:&quot;2021-03-31 10:37:48&quot;,&quot;context&quot;:&quot;【江门转运中心公司】 已收入&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-03-31 05:21:21&quot;,&quot;ftime&quot;:&quot;2021-03-31 05:21:21&quot;,&quot;context&quot;:&quot;【佛山转运中心】 已发出 下一站 【江门转运中心公司】&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-03-31 05:19:19&quot;,&quot;ftime&quot;:&quot;2021-03-31 05:19:19&quot;,&quot;context&quot;:&quot;【佛山转运中心公司】 已收入&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-03-31 03:17:09&quot;,&quot;ftime&quot;:&quot;2021-03-31 03:17:09&quot;,&quot;context&quot;:&quot;【广东省广州市南沙区东涌】 已发出 下一站 【佛山转运中心公司】&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-03-31 02:05:57&quot;,&quot;ftime&quot;:&quot;2021-03-31 02:05:57&quot;,&quot;context&quot;:&quot;【广东省广州市南沙区东涌公司】 已打包&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-03-31 02:05:45&quot;,&quot;ftime&quot;:&quot;2021-03-31 02:05:45&quot;,&quot;context&quot;:&quot;【广东省广州市南沙区东涌公司】 已收件 取件人: 张悦 (18521197069)&quot;,&quot;location&quot;:&quot;&quot;},{&quot;time&quot;:&quot;2021-03-29 19:02:05&quot;,&quot;ftime&quot;:&quot;2021-03-29 19:02:05&quot;,&quot;context&quot;:&quot;【广东省佛山市顺德区勒流公司】 已收件 取件人: 田磊康 (18924576950)&quot;,&quot;location&quot;:&quot;&quot;}]}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>https://www.kuaidi100.com/query?type=shunfeng&amp;postid=10000</java.net.URL>
+</httpSample>
+<sample t="0" it="0" lt="0" ct="0" ts="1617253281782" s="true" lb="word,query" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String"></responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String"></responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <samplerData class="java.lang.String"></samplerData>
+</sample>
+<httpSample t="86" it="0" lt="86" ct="42" ts="1617253281782" s="true" lb="word" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="1147" sby="166" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:22 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Powered-By: PHP/5.5.24
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: dict-co.iciba.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</requestHeader>
+  <responseData class="java.lang.String">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//WAPFORUM//DTD XHTML Mobile 1.0//EN&quot; &quot;http://www.wapforum.org/DTD/xhtml-mobile10.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+  &lt;head&gt;
+
+  
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;application/xhtml+xml; charset=UTF-8&quot; /&gt;
+  &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-cache&quot; /&gt;
+  &lt;meta name=&quot;HandheldFriendly&quot; content=&quot;true&quot; /&gt;
+  
+  
+  &lt;meta name=&quot;keywords&quot; content=&quot;英语,学习,翻译&quot;  /&gt;
+  
+    &lt;title&gt;爱词霸 翻译&lt;/title&gt;    
+   
+
+    
+  &lt;/head&gt;
+&lt;body&gt;
+&lt;br&gt;
+&lt;img height=&quot;20&quot; width=&quot;90&quot; alt=&quot;爱词霸&quot; src=&quot;iciba_LOGO.gif&quot;/&gt;&lt;br&gt;&lt;br&gt;
+abbr.&amp;nbsp;&amp;nbsp;stratum super stratum （Latin=layer upon layer） （拉丁语）层叠&amp;nbsp;&amp;nbsp;specific soluble substance 特异性可溶性物质&amp;nbsp;&amp;nbsp;single-screw ship 单螺旋桨船&amp;nbsp;&amp;nbsp;sterile saline soak 无茵盐水浸泡&amp;nbsp;&amp;nbsp;&lt;br /&gt;
+
+&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;/&quot;&gt;返回查词首页&lt;/a&gt;	
+&lt;/body&gt;
+&lt;/html&gt;
+	</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://dict-co.iciba.com/search.php?word=sss&amp;submit=提交</java.net.URL>
+</httpSample>
+<httpSample t="209" it="0" lt="209" ct="175" ts="1617253281868" s="true" lb="query" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="479" sby="153" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:22 GMT
+Content-Type: text/html;charset=UTF-8
+Content-Length: 200
+Connection: keep-alive
+Vary: Accept-Encoding
+P3P: CP=&quot;IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT&quot;
+Cache-Control: no-cache
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: www.kuaidi100.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;message&quot;:&quot;ok&quot;,&quot;nu&quot;:&quot;10000&quot;,&quot;ischeck&quot;:&quot;1&quot;,&quot;com&quot;:&quot;shunfeng&quot;,&quot;status&quot;:&quot;200&quot;,&quot;condition&quot;:&quot;F00&quot;,&quot;state&quot;:&quot;3&quot;,&quot;data&quot;:[{&quot;time&quot;:&quot;2021-03-08 13:01:22&quot;,&quot;context&quot;:&quot;查无结果&quot;,&quot;ftime&quot;:&quot;2021-03-08 13:01:22&quot;}]}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>https://www.kuaidi100.com/query?type=shunfeng&amp;postid=10000</java.net.URL>
+</httpSample>
+<sample t="1" it="0" lt="0" ct="0" ts="1617253282077" s="true" lb="weather,query,word" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String"></responseHeader>
+  <requestHeader class="java.lang.String"></requestHeader>
+  <responseData class="java.lang.String"></responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <samplerData class="java.lang.String"></samplerData>
+</sample>
+<httpSample t="3395" it="0" lt="3395" ct="5" ts="1617253282078" s="true" lb="weather" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="809" sby="186" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Date: Thu, 01 Apr 2021 05:01:22 GMT
+Server: Apache/2.4.37
+X-Powered-By: PHP/5.6.38
+Expires: Mon,26Jul199705:00:00GMT
+Pragma: no-cache
+Vary: Accept-Encoding,User-Agent
+Keep-Alive: timeout=5, max=100
+Connection: Keep-Alive
+Transfer-Encoding: chunked
+Content-Type: text/html; charset=utf-8
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: api.qingyunke.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;result&quot;:0,&quot;content&quot;:&quot;深圳天气 ：当前温度27℃，感冒低发期，天气舒适，请注意多吃蔬菜水果，多喝水哦。{br}[04月01日] ：多云，低温 25℃，高温 31℃，风力3级{br}[04月02日] ：多云，低温 25℃，高温 31℃，风力2级{br}[04月03日] ：晴，低温 25℃，高温 32℃，风力2级{br}[04月04日] ：多云，低温 25℃，高温 32℃，风力2级{br}[04月05日] ：多云，低温 22℃，高温 29℃，风力3级&quot;}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://api.qingyunke.com/api.php?key=free&amp;appid=0&amp;msg=深圳天气</java.net.URL>
+</httpSample>
+<httpSample t="207" it="0" lt="207" ct="166" ts="1617253285474" s="true" lb="query" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="514" sby="153" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:25 GMT
+Content-Type: text/html;charset=UTF-8
+Content-Length: 235
+Connection: keep-alive
+Vary: Accept-Encoding
+P3P: CP=&quot;IDC DSP COR ADM DEVi TAIi PSA PSD IVAi IVDi CONi HIS OUR IND CNT&quot;
+Cache-Control: no-cache
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: www.kuaidi100.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</requestHeader>
+  <responseData class="java.lang.String">{&quot;message&quot;:&quot;ok&quot;,&quot;nu&quot;:&quot;10000&quot;,&quot;ischeck&quot;:&quot;0&quot;,&quot;condition&quot;:&quot;B00&quot;,&quot;com&quot;:&quot;shunfeng&quot;,&quot;status&quot;:&quot;200&quot;,&quot;state&quot;:&quot;1&quot;,&quot;data&quot;:[{&quot;time&quot;:&quot;2021-04-01 10:35:38&quot;,&quot;ftime&quot;:&quot;2021-04-01 10:35:38&quot;,&quot;context&quot;:&quot;揽收任务已分配给梁平为&quot;,&quot;location&quot;:&quot;&quot;}]}</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>https://www.kuaidi100.com/query?type=shunfeng&amp;postid=10000</java.net.URL>
+</httpSample>
+<httpSample t="84" it="0" lt="84" ct="42" ts="1617253285681" s="true" lb="word" rc="200" rm="OK" tn="关键字驱动 1-1" dt="text" by="1147" sby="166" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+  <responseHeader class="java.lang.String">HTTP/1.1 200 OK
+Server: nginx
+Date: Thu, 01 Apr 2021 05:01:25 GMT
+Content-Type: text/html; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+X-Powered-By: PHP/5.5.24
+</responseHeader>
+  <requestHeader class="java.lang.String">Connection: keep-alive
+Host: dict-co.iciba.com
+User-Agent: Apache-HttpClient/4.5.3 (Java/1.8.0_191)
+</requestHeader>
+  <responseData class="java.lang.String">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;!DOCTYPE html PUBLIC &quot;-//WAPFORUM//DTD XHTML Mobile 1.0//EN&quot; &quot;http://www.wapforum.org/DTD/xhtml-mobile10.dtd&quot;&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+  &lt;head&gt;
+
+  
+  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;application/xhtml+xml; charset=UTF-8&quot; /&gt;
+  &lt;meta http-equiv=&quot;Cache-Control&quot; content=&quot;no-cache&quot; /&gt;
+  &lt;meta name=&quot;HandheldFriendly&quot; content=&quot;true&quot; /&gt;
+  
+  
+  &lt;meta name=&quot;keywords&quot; content=&quot;英语,学习,翻译&quot;  /&gt;
+  
+    &lt;title&gt;爱词霸 翻译&lt;/title&gt;    
+   
+
+    
+  &lt;/head&gt;
+&lt;body&gt;
+&lt;br&gt;
+&lt;img height=&quot;20&quot; width=&quot;90&quot; alt=&quot;爱词霸&quot; src=&quot;iciba_LOGO.gif&quot;/&gt;&lt;br&gt;&lt;br&gt;
+abbr.&amp;nbsp;&amp;nbsp;stratum super stratum （Latin=layer upon layer） （拉丁语）层叠&amp;nbsp;&amp;nbsp;specific soluble substance 特异性可溶性物质&amp;nbsp;&amp;nbsp;single-screw ship 单螺旋桨船&amp;nbsp;&amp;nbsp;sterile saline soak 无茵盐水浸泡&amp;nbsp;&amp;nbsp;&lt;br /&gt;
+
+&lt;br /&gt;&lt;br /&gt;&lt;a href=&quot;/&quot;&gt;返回查词首页&lt;/a&gt;	
+&lt;/body&gt;
+&lt;/html&gt;
+	</responseData>
+  <responseFile class="java.lang.String"></responseFile>
+  <cookies class="java.lang.String"></cookies>
+  <method class="java.lang.String">GET</method>
+  <queryString class="java.lang.String"></queryString>
+  <java.net.URL>http://dict-co.iciba.com/search.php?word=sss&amp;submit=提交</java.net.URL>
+</httpSample>
+
+</testResults>
