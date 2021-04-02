@@ -1,0 +1,4 @@
+﻿case_id,kwargs,params,desc
+test_001,"check,login",,
+test_002,"check,register",,
+test_003,"check,register,login",,

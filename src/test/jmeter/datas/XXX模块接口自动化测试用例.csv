@@ -1,0 +1,2 @@
+﻿case_id,title,desc,method,request_uri,params,expect,actual,pre_sql,assert_sql,isAssert
+API001,回复,commentId参数正确，commentType参数正确，questionId参数正确，userId参数正确,POST,/hcp/studyAbroad/question/comment,"{""commentId"":""0"",""commentType"":""1"",""questionId"":$questionId,""content"":""测试回复""}",,,********,,

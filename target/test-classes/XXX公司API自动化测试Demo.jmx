@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.1.1 r1855137">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="XXXX公司API自动化测试Demo" enabled="true">
+      <stringProp name="TestPlan.comments">1、接口测试用例数据与脚本分离，
+2、jmeter脚本通过封装的元件获取测试用例数据
+3、组装http协议请求：url、method、params、sql
+4、接口用例数据参数化，在params设计中使用参数，beanshell脚本替换参数
+5、如有多个关联动态数据，还需要通过sql查询出来替换params组成正确的请求参数
+6、断言：接口数据响应断言，通过多设计一个sql来做判断</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="test_env_ip" elementType="Argument">
+            <stringProp name="Argument.name">test_env_ip</stringProp>
+            <stringProp name="Argument.value">************</stringProp>
+            <stringProp name="Argument.desc">测试环境服务器地址</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="MySQL Connection Configuration" enabled="true">
+        <stringProp name="TestPlan.comments">数据库配置信息</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="checkQuery"></stringProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="dataSource">MySQL</stringProp>
+        <stringProp name="dbUrl">jdbc:mysql://${test_env_ip}:3306/</stringProp>
+        <stringProp name="driver">com.mysql.jdbc.Driver</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="password">Hcp_dev_0326</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <stringProp name="username">root</stringProp>
+        <stringProp name="initQuery"></stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <JDBCDataSource guiclass="TestBeanGUI" testclass="JDBCDataSource" testname="PgSQL Connection Configuration" enabled="true">
+        <stringProp name="TestPlan.comments">数据库配置信息；url后面跟的还是数据库名</stringProp>
+        <boolProp name="autocommit">true</boolProp>
+        <stringProp name="checkQuery"></stringProp>
+        <stringProp name="connectionAge">5000</stringProp>
+        <stringProp name="dataSource">PgSQL</stringProp>
+        <stringProp name="dbUrl">jdbc:postgresql</stringProp>
+        <stringProp name="driver">org.postgresql.Driver</stringProp>
+        <boolProp name="keepAlive">true</boolProp>
+        <stringProp name="password">Jingjing123</stringProp>
+        <stringProp name="poolMax">0</stringProp>
+        <stringProp name="timeout">10000</stringProp>
+        <stringProp name="transactionIsolation">DEFAULT</stringProp>
+        <stringProp name="trimInterval">60000</stringProp>
+        <stringProp name="username">**********</stringProp>
+        <stringProp name="initQuery"></stringProp>
+      </JDBCDataSource>
+      <hashTree/>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+        <stringProp name="TestPlan.comments">文件名称，可以是相对路径，testcase放在jmeter的脚本同一路径；
+数据文件格式encoding务必是utf-8，确保中文不会乱码
+Filename：文件路径
+Variable Names:变量名
+ignore first lne ...:忽略第一行
+Recycle of EoF：是否允许循环取数据，选择false，脚本是根据csv的数据来决定执行多少次
+Stop thread on EOF:上一个值有效false，这里true才会停止线程，即：数据读完停止执行</stringProp>
+        <stringProp name="delimiter">,</stringProp>
+        <stringProp name="fileEncoding">utf-8</stringProp>
+        <stringProp name="filename">**********</stringProp>
+        <boolProp name="ignoreFirstLine">true</boolProp>
+        <boolProp name="quotedData">true</boolProp>
+        <boolProp name="recycle">false</boolProp>
+        <stringProp name="shareMode">shareMode.all</stringProp>
+        <boolProp name="stopThread">true</boolProp>
+        <stringProp name="variableNames">caseid,title,desc,method,path,params,expect,actual,sql1,sql2,isAssert</stringProp>
+      </CSVDataSet>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP请求默认值" enabled="true">
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="用户定义的变量" enabled="true">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.domain">${test_env_ip}</stringProp>
+        <stringProp name="HTTPSampler.port">9500</stringProp>
+        <stringProp name="HTTPSampler.protocol"></stringProp>
+        <stringProp name="HTTPSampler.contentEncoding">utf-8</stringProp>
+        <stringProp name="HTTPSampler.path"></stringProp>
+        <stringProp name="TestPlan.comments">默认请求ip或是url及协议https/http
+如果默認參數不想通過修改脚本來實現，那麽可以寫入一個txt當作配置文件</stringProp>
+        <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+        <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+        <stringProp name="HTTPSampler.response_timeout"></stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">source</stringProp>
+            <stringProp name="Header.value">0</stringProp>
+          </elementProp>
+        </collectionProp>
+        <stringProp name="TestPlan.comments">默认请求头，请求数据类型：application/json
+source在接口中必带，标识来源，不同的注册渠道来源，如果這個也要設計成異常用例的參考參數
+例：pte注册的用户来雅思哥登录，给其分配一个雅思哥的token</stringProp>
+      </HeaderManager>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="API自动化执行用例" enabled="true">
+        <stringProp name="TestPlan.comments">设计用户登录只作为登录一次，并获取token提供给后面的接口使用</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1566295132000</longProp>
+        <longProp name="ThreadGroup.end_time">1566295132000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="仅一次控制器" enabled="true"/>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${caseid}-${title}-${desc}" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;channel&quot;: 0,&#xd;
+  &quot;deviceName&quot;: &quot;android&quot;,&#xd;
+  &quot;deviceType&quot;: &quot;1&quot;,&#xd;
+  &quot;deviceid&quot;: &quot;123456789&quot;,&#xd;
+  &quot;loginType&quot;: 0,&#xd;
+  &quot;mobile&quot;: ${mobile},&#xd;
+  &quot;password&quot;: &quot;${passwd}&quot;,&#xd;
+  &quot;verifyCode&quot;: &quot;0000&quot;,&#xd;
+  &quot;zone&quot;: &quot;86&quot;&#xd;
+}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port">9300</stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${path}</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="TestPlan.comments">testcase的用例编号+标题</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor" enabled="true">
+              <stringProp name="TestPlan.comments">查询sql，可登录的用户</stringProp>
+              <stringProp name="dataSource">PgSQL</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">SELECT mobile,raw_password FROM public.app_users where raw_password is not NULL limit 10;</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames"></stringProp>
+              <stringProp name="resultVariable">mobile_result</stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCPreProcessor>
+            <hashTree/>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">Object m=vars.getObject(&quot;mobile_result&quot;).get(${__Random(0,9,NUM)}).get(&quot;mobile&quot;);
+Object p=vars.getObject(&quot;mobile_result&quot;).get(${NUM}).get(&quot;raw_password&quot;);
+vars.put(&quot;mobile&quot;,m.toString());
+vars.put(&quot;passwd&quot;,p.toString());</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON token" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.content.token</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON userId" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">userId</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.content.userId</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON username" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">username</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.content.username</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="提取登录token并设置全局变量" enabled="true">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">${__setProperty(token1,${token},)}
+${__setProperty(user_id,${userId},)}
+${__setProperty(mobile,${mobile},)}</stringProp>
+            </BeanShellPostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="循环控制器" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </LoopController>
+        <hashTree>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${caseid}-${title}-${desc}" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">${params}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain"></stringProp>
+            <stringProp name="HTTPSampler.port"></stringProp>
+            <stringProp name="HTTPSampler.protocol"></stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">${requri}</stringProp>
+            <stringProp name="HTTPSampler.method">${method}</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+            <stringProp name="TestPlan.comments">testcase的用例编号+标题</stringProp>
+          </HTTPSamplerProxy>
+          <hashTree>
+            <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
+              <collectionProp name="HeaderManager.headers">
+                <elementProp name="" elementType="Header">
+                  <stringProp name="Header.name">Authorization</stringProp>
+                  <stringProp name="Header.value">Bearer ${__P(token1)}</stringProp>
+                </elementProp>
+              </collectionProp>
+            </HeaderManager>
+            <hashTree/>
+            <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor" enabled="false">
+              <stringProp name="dataSource">MySQL</stringProp>
+              <stringProp name="query">${sql1}</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+              <stringProp name="resultVariable">pre_result</stringProp>
+              <stringProp name="variableNames"></stringProp>
+            </JDBCPreProcessor>
+            <hashTree/>
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="false">
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="script">// 预置参数处理，不要硬编码，建议java自行开发通用工具类或直接代码实现
+String str=vars.get(&quot;params&quot;);
+
+Object m3=vars.getObject(&quot;pre_result&quot;).get(${__Random(0,9,NUM)}).get(&quot;id&quot;);
+
+String pre_result=m3.toString();
+
+if ( str.contains(&quot;$content&quot;) &amp;&amp; str.contains(&quot;$outDate&quot;)){
+// 实现参数替换
+}else if (str.contains(&quot;$questionId&quot;)){
+//
+}else{
+//
+}
+// 最终替换参数，传入sampler
+vars.put(&quot;new_params&quot;,str);</stringProp>
+            </BeanShellPreProcessor>
+            <hashTree/>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON questionId" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">questionId</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.content.questionId</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+            <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
+              <boolProp name="resetInterpreter">false</boolProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="script">${__setProperty(rs_questionId,${questionId},)}
+
+String sql=vars.get(&quot;sql2&quot;);
+String isAssert=vars.get(&quot;isAssert&quot;);
+
+if(isAssert.equals(&quot;true&quot;)){
+	
+	if (sql.contains(&quot;$questionId&quot;)){
+	    	String query=sql.replace(&quot;$questionId&quot;,&quot;${__P(rs_questionId)}&quot;);
+	    	vars.put(&quot;pos_query&quot;,query);
+    	}else{
+    		log.info(&quot;failture!&quot;);
+    	}
+}else{
+	log.info(&quot;No result need Assert&quot;);
+}
+</stringProp>
+            </BeanShellPostProcessor>
+            <hashTree/>
+            <JDBCPostProcessor guiclass="TestBeanGUI" testclass="JDBCPostProcessor" testname="JDBC PostProcessor" enabled="false">
+              <stringProp name="dataSource">MySQL</stringProp>
+              <stringProp name="queryType">Select Statement</stringProp>
+              <stringProp name="query">${pos_query}</stringProp>
+              <stringProp name="queryArguments"></stringProp>
+              <stringProp name="queryArgumentsTypes"></stringProp>
+              <stringProp name="variableNames">result</stringProp>
+              <stringProp name="resultVariable"></stringProp>
+              <stringProp name="queryTimeout"></stringProp>
+              <stringProp name="resultSetHandler">Store as String</stringProp>
+            </JDBCPostProcessor>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell断言" enabled="true">
+              <stringProp name="BeanShellAssertion.query">String expected=vars.get(&quot;expect&quot;);
+String res=prev.getResponseDataAsString();
+
+if(!res.contains(expected)){
+		Failure=true;
+		FailureMessage = &quot;响应结果 don&apos;t contains keywords:&quot;+expected+&quot;，断言失败!预期结果与实际不符!&quot;;
+	}else{
+		FailureMessage = prev.getResponseDataAsString() +&quot;contains keywords: &quot;+expected+&quot;断言成功!预期结果与实际一致!&quot;;
+	}
+log.info(FailureMessage);
+vars.put(&quot;message&quot;,FailureMessage);
+</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell断言" enabled="false">
+              <stringProp name="BeanShellAssertion.query">import java.sql.*;  
+import java.util.*;  
+import java.lang.*;  
+
+String Assert=vars.get(&quot;isAssert&quot;);
+
+if ( Assert.contains(&quot;true&quot;) ){
+
+	// 数据库连接字段
+		String drive = &quot;com.mysql.jdbc.Driver&quot;;
+		String url = &quot;jdbc:mysql://&quot;+${test_env_ip}+&quot;:3306/&quot;;
+		String dbName = &quot;&quot;;
+		String user = &quot;root&quot;;
+		String pass = &quot;******&quot;;
+
+		String query = &quot;${re_query}&quot;;
+
+		log.info(&quot;替換后的sql：&quot; + query);
+
+		Connection Mycon = null;
+		Statement Mystmt = null;
+		ResultSet Myrset = null;
+		String res=null;
+
+		// try中获取数据库连接
+		try {
+			Mycon = DriverManager.getConnection(url + dbName + &quot;?useSSL=false&quot;,
+					user, pass);
+			log.info(&quot;連接成功&quot;);
+		} catch (SQLException e) {
+			log.info(e.getMessage());
+		}
+
+		try {
+			Mystmt = Mycon.createStatement();
+			log.info(&quot;創建查詢!&quot;);
+			Myrset = Mystmt.executeQuery(query);
+			log.info(&quot;執行sql:&quot; + query);
+		} catch (SQLException e) {
+			log.info(e.getMessage());
+		}
+		// 如果取到库中的数据，赋值给history
+		try {
+			while (Myrset.next()) {
+				res = Myrset.getString(1);
+				log.info(&quot;查詢結果:&quot; + res);
+			}
+			if( res.equals(&quot;1&quot;)){
+			    Failure=false;
+			    FailureMessage = &quot;success!!&quot;;
+			}else{
+			    FailureMessage =prev.getResponseDataAsString()+&quot;failture!&quot;;
+			}
+			
+			Myrset.close();
+			Mystmt.close();
+			Mycon.close();
+			
+		} catch (SQLException e) {
+
+			Myrset.close();
+			Mystmt.close();
+			Mycon.close();
+			
+			log.info(e.getMessage());
+		}
+}</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+            <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell断言" enabled="false">
+              <stringProp name="BeanShellAssertion.query">import com.alibaba.fastjson.JSON;   //引入JSON的类
+
+String checkDb=vars.get(&quot;checkDb&quot;);  //获取是否校验数据库
+log.info(&quot;checkDb:&quot;+checkDb);    //为了方便调试 我把信息输出了
+if(checkDb.equals(&quot;true&quot;)){   //判断是否检查数据库
+    log.info(&quot;进入校验数据库&quot;); //为了方便调试
+    String preDbMap=vars.get(&quot;DbMap&quot;); //拿到预期数据库的值
+   int paramSize =bsh.args.length;  //它是一个数组 
+   if(paramSize&gt;0){       //大于0 说明是有预期结果的
+    preDbMap =bsh.args[0];
+    }else{
+        preDbMap=&quot;没有预期数据库结果!!!!!&quot;;  //小于0 认为没有预期结果
+    }  
+    preDbMap =preDbMap.trim();  //把预期结果去掉空格
+    log.info(&quot;preDbMap:&quot;+preDbMap); //为了方便调试
+    List results=vars.getObject(&quot;resultList&quot;);  //拿到数据库返回的List对象，是查询数据库之后的数据
+    log.info(&quot;results对象:&quot;+results);    //为了方便调试
+    if(null!=results){  //如果results 等于null 说明数据库没有查询到数据，可能是绑定或者插入没有成功
+        int size=results.size();     //获取他的长度
+        log.info(&quot;results的SIZE:&quot;+size); //为了方便调试
+        if(size&gt;0){      
+            log.info(&quot;进入到SIZE了:&quot;);
+            for(Map m:results){   //因为返回的List对象里面是一个MAP，所以是key和value的形式，可以用MAP的方式遍历循环
+                String dbMap =JSON.toJSONString(m); //拿到第一个对象的Map 进行转JSON字符串
+                dbMap =dbMap.trim(); //去掉空格
+                log.info(&quot;数据库JSON:&quot;+dbMap); //为了方便调试
+                if(!preDbMap.equalsIgnoreCase(dbMap)){  //用预期的JSON串和查询到的结果JSON串进行对比
+                    //如果不一样的情况下，说明数据库的断言失败，可能是程序的问题
+                    String result =prev.getResponseDataAsString();   //拿到实际结果的值，用于存放到返回数据中
+                prev.setResponseCode(&quot;506&quot;);            //我们自定义了一个CODE码，告诉结果显示的CODE是这个
+                    prev.setSuccessful(false);   //设置结果为错误
+                    prev.setResponseMessage(&quot;接口断言通过,数据库校验未通过&quot;);  //设置一个提示信息，大概是说明原因导致的
+                    //写入结果返回的结果，还有数据库校验未通过，我们的预期数据库的值是，实际的值是，加上这个是为了方便定位问题
+            prev.setResponseData(result+&quot;,\n数据库校验未通过,\n预期值:&quot;+preDbMap+&quot;,\n实际值:&quot;+dbMap);
+                    }       
+                }       
+        }else{
+            //当SIZE没有大于0的时候，说明也没有查询出来数据，可能没有绑定成功。
+            log.info(&quot;没有到SIZE了:&quot;);
+            //设置结果为错误
+            prev.setSuccessful(false);
+            //设置提示信息
+            prev.setResponseData(&quot;数据库没有返回信息,接口result:&quot;+result);
+        }
+    }else{
+        log.info(&quot;result为null&quot;);
+            prev.setSuccessful(false);
+            prev.setResponseData(&quot;数据没有返回信息,接口result:&quot;+result);
+        }
+}else{
+    //当checkDb不等于true的情况下，可能是用户设置了这条用例不需要检查数据库
+    log.info(&quot;没有进入判断&quot;);
+    }</stringProp>
+              <stringProp name="BeanShellAssertion.filename"></stringProp>
+              <stringProp name="BeanShellAssertion.parameters"></stringProp>
+              <boolProp name="BeanShellAssertion.resetInterpreter">false</boolProp>
+            </BeanShellAssertion>
+            <hashTree/>
+          </hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="如果（If）控制器" enabled="true">
+            <stringProp name="IfController.condition">!${JMeterThread.last_sample_ok}</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="true">
+              <stringProp name="BeanShellSampler.query">import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class AppendFile {
+ //将content写入到指定文件fileName中
+ public static void appendFile(String fileName, String content) throws IOException{
+ FileWriter writer = null;
+try {
+ writer = new FileWriter(fileName, true); //true 换行追加记录
+ content = content + &quot;\n&quot;;
+ writer.write(content);
+ } catch(IOException e){
+ e.printStackTrace();
+ }finally{
+ if (writer != null){
+ writer.close();
+}
+} 
+}
+}
+System.out.println(&quot;******写入文件start*******&quot;);
+
+//xxx,userTypr,nickName,account,passwd
+String filePath = &quot;D:/errorData.csv&quot;;
+String getdata1 = vars.get(&quot;caseid&quot;);
+String getdata2 = vars.get(&quot;title&quot;); //此处的username就是从sample中获取的变量名,根据实际情况修改。
+String getdata3 = vars.get(&quot;pramas&quot;);
+String getdata4 = vars.get(&quot;isAssert&quot;);
+String getdata5 = vars.get(&quot;message&quot;);
+//String getdata4 = vars.get(&quot;msg&quot;);
+//String getdata5 = vars.get(&quot;mm&quot;);
+AppendFile.appendFile(filePath,&quot;&quot;+&apos;,&apos;+&quot;&quot;+&apos;,&apos;+&quot;&quot;+&apos;,&apos;+&quot;&quot;+&apos;,&apos;+&quot;&quot;+&apos;,&apos;+&quot;&quot;+&apos;,&apos;+&quot;&quot;+&apos;,&apos;+getdata5);
+System.out.println(&quot;******写入文件end*******&quot;);</stringProp>
+              <stringProp name="BeanShellSampler.filename"></stringProp>
+              <stringProp name="BeanShellSampler.parameters"></stringProp>
+              <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+            </BeanShellSampler>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="察看结果树" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
