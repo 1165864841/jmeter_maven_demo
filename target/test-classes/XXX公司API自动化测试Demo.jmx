@@ -73,7 +73,7 @@ Recycle of EoF：是否允许循环取数据，选择false，脚本是根据csv�
 Stop thread on EOF:上一个值有效false，这里true才会停止线程，即：数据读完停止执行</stringProp>
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding">utf-8</stringProp>
-        <stringProp name="filename">**********</stringProp>
+        <stringProp name="filename">./datas/XXX模块接口自动化测试用例.csv</stringProp>
         <boolProp name="ignoreFirstLine">true</boolProp>
         <boolProp name="quotedData">true</boolProp>
         <boolProp name="recycle">false</boolProp>
@@ -130,50 +130,63 @@ source在接口中必带，标识来源，不同的注册渠道来源，如果�
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="仅一次控制器" enabled="true"/>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="仅一次控制器" enabled="true">
+          <stringProp name="TestPlan.comments">如果需要这样判断</stringProp>
+        </OnceOnlyController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${caseid}-${title}-${desc}" enabled="true">
-            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="${caseid}-${title}-${desc}" enabled="true">
+            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">{&#xd;
-  &quot;channel&quot;: 0,&#xd;
-  &quot;deviceName&quot;: &quot;android&quot;,&#xd;
-  &quot;deviceType&quot;: &quot;1&quot;,&#xd;
-  &quot;deviceid&quot;: &quot;123456789&quot;,&#xd;
-  &quot;loginType&quot;: 0,&#xd;
-  &quot;mobile&quot;: ${mobile},&#xd;
-  &quot;password&quot;: &quot;${passwd}&quot;,&#xd;
-  &quot;verifyCode&quot;: &quot;0000&quot;,&#xd;
-  &quot;zone&quot;: &quot;86&quot;&#xd;
-}</stringProp>
+                <elementProp name="Sleep_Time" elementType="Argument">
+                  <stringProp name="Argument.name">Sleep_Time</stringProp>
+                  <stringProp name="Argument.value">100</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="Sleep_Mask" elementType="Argument">
+                  <stringProp name="Argument.name">Sleep_Mask</stringProp>
+                  <stringProp name="Argument.value">0xFF</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="Label" elementType="Argument">
+                  <stringProp name="Argument.name">Label</stringProp>
+                  <stringProp name="Argument.value">${title}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="ResponseCode" elementType="Argument">
+                  <stringProp name="Argument.name">ResponseCode</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="ResponseMessage" elementType="Argument">
+                  <stringProp name="Argument.name">ResponseMessage</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="Status" elementType="Argument">
+                  <stringProp name="Argument.name">Status</stringProp>
+                  <stringProp name="Argument.value">OK</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="SamplerData" elementType="Argument">
+                  <stringProp name="Argument.name">SamplerData</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="ResultData" elementType="Argument">
+                  <stringProp name="Argument.name">ResultData</stringProp>
+                  <stringProp name="Argument.value">${expect}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
-            <stringProp name="HTTPSampler.domain"></stringProp>
-            <stringProp name="HTTPSampler.port">9300</stringProp>
-            <stringProp name="HTTPSampler.protocol"></stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${path}</stringProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            <stringProp name="TestPlan.comments">testcase的用例编号+标题</stringProp>
-          </HTTPSamplerProxy>
+            <stringProp name="classname">org.apache.jmeter.protocol.java.test.JavaTest</stringProp>
+          </JavaSampler>
           <hashTree>
-            <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor" enabled="true">
+            <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor" enabled="false">
               <stringProp name="TestPlan.comments">查询sql，可登录的用户</stringProp>
               <stringProp name="dataSource">PgSQL</stringProp>
               <stringProp name="queryType">Select Statement</stringProp>
-              <stringProp name="query">SELECT mobile,raw_password FROM public.app_users where raw_password is not NULL limit 10;</stringProp>
+              <stringProp name="query"></stringProp>
               <stringProp name="queryArguments"></stringProp>
               <stringProp name="queryArgumentsTypes"></stringProp>
               <stringProp name="variableNames"></stringProp>
@@ -182,31 +195,16 @@ source在接口中必带，标识来源，不同的注册渠道来源，如果�
               <stringProp name="resultSetHandler">Store as String</stringProp>
             </JDBCPreProcessor>
             <hashTree/>
-            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="true">
+            <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="false">
               <boolProp name="resetInterpreter">false</boolProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
-              <stringProp name="script">Object m=vars.getObject(&quot;mobile_result&quot;).get(${__Random(0,9,NUM)}).get(&quot;mobile&quot;);
-Object p=vars.getObject(&quot;mobile_result&quot;).get(${NUM}).get(&quot;raw_password&quot;);
-vars.put(&quot;mobile&quot;,m.toString());
-vars.put(&quot;passwd&quot;,p.toString());</stringProp>
+              <stringProp name="script">// 如果需要处理sql、入参需要重新替换参数，用于动态数据</stringProp>
             </BeanShellPreProcessor>
             <hashTree/>
-            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON token" enabled="true">
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON token" enabled="false">
               <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
               <stringProp name="JSONPostProcessor.jsonPathExprs">$.content.token</stringProp>
-              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
-            </JSONPostProcessor>
-            <hashTree/>
-            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON userId" enabled="true">
-              <stringProp name="JSONPostProcessor.referenceNames">userId</stringProp>
-              <stringProp name="JSONPostProcessor.jsonPathExprs">$.content.userId</stringProp>
-              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
-            </JSONPostProcessor>
-            <hashTree/>
-            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON username" enabled="true">
-              <stringProp name="JSONPostProcessor.referenceNames">username</stringProp>
-              <stringProp name="JSONPostProcessor.jsonPathExprs">$.content.username</stringProp>
               <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
             </JSONPostProcessor>
             <hashTree/>
@@ -214,9 +212,7 @@ vars.put(&quot;passwd&quot;,p.toString());</stringProp>
               <boolProp name="resetInterpreter">false</boolProp>
               <stringProp name="parameters"></stringProp>
               <stringProp name="filename"></stringProp>
-              <stringProp name="script">${__setProperty(token1,${token},)}
-${__setProperty(user_id,${userId},)}
-${__setProperty(mobile,${mobile},)}</stringProp>
+              <stringProp name="script">${__setProperty(token1,${token},)}</stringProp>
             </BeanShellPostProcessor>
             <hashTree/>
           </hashTree>
@@ -226,32 +222,53 @@ ${__setProperty(mobile,${mobile},)}</stringProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </LoopController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="${caseid}-${title}-${desc}" enabled="true">
-            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
-            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <JavaSampler guiclass="JavaTestSamplerGui" testclass="JavaSampler" testname="${caseid}-${title}-${desc}" enabled="true">
+            <elementProp name="arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" enabled="true">
               <collectionProp name="Arguments.arguments">
-                <elementProp name="" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.value">${params}</stringProp>
+                <elementProp name="Sleep_Time" elementType="Argument">
+                  <stringProp name="Argument.name">Sleep_Time</stringProp>
+                  <stringProp name="Argument.value">100</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="Sleep_Mask" elementType="Argument">
+                  <stringProp name="Argument.name">Sleep_Mask</stringProp>
+                  <stringProp name="Argument.value">0xFF</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="Label" elementType="Argument">
+                  <stringProp name="Argument.name">Label</stringProp>
+                  <stringProp name="Argument.value">${title}</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="ResponseCode" elementType="Argument">
+                  <stringProp name="Argument.name">ResponseCode</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="ResponseMessage" elementType="Argument">
+                  <stringProp name="Argument.name">ResponseMessage</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="Status" elementType="Argument">
+                  <stringProp name="Argument.name">Status</stringProp>
+                  <stringProp name="Argument.value">OK</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="SamplerData" elementType="Argument">
+                  <stringProp name="Argument.name">SamplerData</stringProp>
+                  <stringProp name="Argument.value"></stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+                <elementProp name="ResultData" elementType="Argument">
+                  <stringProp name="Argument.name">ResultData</stringProp>
+                  <stringProp name="Argument.value">${expect}</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
             </elementProp>
-            <stringProp name="HTTPSampler.domain"></stringProp>
-            <stringProp name="HTTPSampler.port"></stringProp>
-            <stringProp name="HTTPSampler.protocol"></stringProp>
-            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
-            <stringProp name="HTTPSampler.path">${requri}</stringProp>
-            <stringProp name="HTTPSampler.method">${method}</stringProp>
-            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
-            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
-            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
-            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
-            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
-            <stringProp name="HTTPSampler.response_timeout"></stringProp>
-            <stringProp name="TestPlan.comments">testcase的用例编号+标题</stringProp>
-          </HTTPSamplerProxy>
+            <stringProp name="classname">org.apache.jmeter.protocol.java.test.JavaTest</stringProp>
+          </JavaSampler>
           <hashTree>
             <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP信息头管理器" enabled="true">
               <collectionProp name="HeaderManager.headers">
@@ -260,6 +277,7 @@ ${__setProperty(mobile,${mobile},)}</stringProp>
                   <stringProp name="Header.value">Bearer ${__P(token1)}</stringProp>
                 </elementProp>
               </collectionProp>
+              <stringProp name="TestPlan.comments">特殊处理</stringProp>
             </HeaderManager>
             <hashTree/>
             <JDBCPreProcessor guiclass="TestBeanGUI" testclass="JDBCPreProcessor" testname="JDBC PreProcessor" enabled="false">
@@ -277,23 +295,8 @@ ${__setProperty(mobile,${mobile},)}</stringProp>
             <BeanShellPreProcessor guiclass="TestBeanGUI" testclass="BeanShellPreProcessor" testname="BeanShell PreProcessor" enabled="false">
               <stringProp name="filename"></stringProp>
               <stringProp name="parameters"></stringProp>
-              <boolProp name="resetInterpreter">false</boolProp>
-              <stringProp name="script">// 预置参数处理，不要硬编码，建议java自行开发通用工具类或直接代码实现
-String str=vars.get(&quot;params&quot;);
-
-Object m3=vars.getObject(&quot;pre_result&quot;).get(${__Random(0,9,NUM)}).get(&quot;id&quot;);
-
-String pre_result=m3.toString();
-
-if ( str.contains(&quot;$content&quot;) &amp;&amp; str.contains(&quot;$outDate&quot;)){
-// 实现参数替换
-}else if (str.contains(&quot;$questionId&quot;)){
-//
-}else{
-//
-}
-// 最终替换参数，传入sampler
-vars.put(&quot;new_params&quot;,str);</stringProp>
+              <boolProp name="resetInterpreter">true</boolProp>
+              <stringProp name="script">// 预置参数处理，不要硬编码，建议java自行开发通用工具类或直接代码实现</stringProp>
             </BeanShellPreProcessor>
             <hashTree/>
             <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON questionId" enabled="true">
@@ -309,6 +312,7 @@ vars.put(&quot;new_params&quot;,str);</stringProp>
               <stringProp name="script">${__setProperty(rs_questionId,${questionId},)}
 
 String sql=vars.get(&quot;sql2&quot;);
+
 String isAssert=vars.get(&quot;isAssert&quot;);
 
 if(isAssert.equals(&quot;true&quot;)){
@@ -321,8 +325,7 @@ if(isAssert.equals(&quot;true&quot;)){
     	}
 }else{
 	log.info(&quot;No result need Assert&quot;);
-}
-</stringProp>
+}</stringProp>
             </BeanShellPostProcessor>
             <hashTree/>
             <JDBCPostProcessor guiclass="TestBeanGUI" testclass="JDBCPostProcessor" testname="JDBC PostProcessor" enabled="false">
@@ -338,6 +341,7 @@ if(isAssert.equals(&quot;true&quot;)){
             </JDBCPostProcessor>
             <hashTree/>
             <BeanShellAssertion guiclass="BeanShellAssertionGui" testclass="BeanShellAssertion" testname="BeanShell断言" enabled="true">
+              <stringProp name="TestPlan.comments">断言方式的选取</stringProp>
               <stringProp name="BeanShellAssertion.query">String expected=vars.get(&quot;expect&quot;);
 String res=prev.getResponseDataAsString();
 
@@ -488,9 +492,10 @@ if(checkDb.equals(&quot;true&quot;)){   //判断是否检查数据库
             </BeanShellAssertion>
             <hashTree/>
           </hashTree>
-          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="如果（If）控制器" enabled="true">
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="如果（If）控制器" enabled="false">
             <stringProp name="IfController.condition">!${JMeterThread.last_sample_ok}</stringProp>
             <boolProp name="IfController.evaluateAll">false</boolProp>
+            <stringProp name="TestPlan.comments">根据自己喜好</stringProp>
           </IfController>
           <hashTree>
             <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="true">
