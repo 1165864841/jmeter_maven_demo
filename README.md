@@ -127,3 +127,30 @@
 ###### 4.2、框架模式
 - 本工程示例采用关键字驱动实现脚本开发
 - 当然，可以分模块来开发.jmx脚本，使用不同的数据文件驱动
+###### 4.3、二次开发
+- 不管是开发sampler、还是函数，都是需要继承对应的依赖；pom需要配置依赖
+```
+<!-- 这是函数的依赖jar -->
+<dependency>
+    <groupId>org.apache.jmeter</groupId>
+    <artifactId>ApacheJMeter_functions</artifactId>
+    <version>5.3</version>
+</dependency>
+
+<!-- 这是开发java sampler依赖的核心jar -->
+<dependency>
+    <groupId>org.apache.jmeter</groupId>
+    <artifactId>ApacheJMeter_core</artifactId>
+    <version>5.3</version>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.jmeter</groupId>
+    <artifactId>ApacheJMeter_java</artifactId>
+    <version>5.3</version>
+</dependency>
+```
+- 由于忘记了某些使用jmeter的场景，譬如：需要自己写加密函数、处理数据的方法等等功能，自己写好java然后注册到jmeter运行环境，调试时直接调用jar即可
+- - 在src/test/java开发java功能
+- - 再pom配置maven打包工具放在target/jmeter/lib/ext目标目录下
+- - 如果实在本地调用，不再工程中，还是需要将这个jar移动到本地jmeter环境调试
