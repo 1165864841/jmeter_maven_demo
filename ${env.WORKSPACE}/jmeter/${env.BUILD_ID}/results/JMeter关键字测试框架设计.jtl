@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testResults version="1.2">
-<sample t="1" it="0" lt="0" ct="0" ts="1622112820414" s="true" lb="check,login" rc="200" rm="OK" tn="关键业务流测试计划 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+<sample t="0" it="0" lt="0" ct="0" ts="1622169094013" s="true" lb="check,login" rc="200" rm="OK" tn="关键业务流测试计划 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
   <responseHeader class="java.lang.String"></responseHeader>
   <requestHeader class="java.lang.String"></requestHeader>
   <responseData class="java.lang.String"></responseData>
   <responseFile class="java.lang.String"></responseFile>
   <samplerData class="java.lang.String"></samplerData>
 </sample>
-<sample t="0" it="0" lt="0" ct="0" ts="1622112820419" s="true" lb="check,register" rc="200" rm="OK" tn="关键业务流测试计划 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+<sample t="0" it="0" lt="0" ct="0" ts="1622169094018" s="true" lb="check,register" rc="200" rm="OK" tn="关键业务流测试计划 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
   <responseHeader class="java.lang.String"></responseHeader>
   <requestHeader class="java.lang.String"></requestHeader>
   <responseData class="java.lang.String"></responseData>
   <responseFile class="java.lang.String"></responseFile>
   <samplerData class="java.lang.String"></samplerData>
 </sample>
-<sample t="0" it="0" lt="0" ct="0" ts="1622112820420" s="true" lb="check,register,login" rc="200" rm="OK" tn="关键业务流测试计划 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+<sample t="0" it="0" lt="0" ct="0" ts="1622169094019" s="true" lb="check,register,login" rc="200" rm="OK" tn="关键业务流测试计划 1-1" dt="text" by="0" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
   <responseHeader class="java.lang.String"></responseHeader>
   <requestHeader class="java.lang.String"></requestHeader>
   <responseData class="java.lang.String"></responseData>

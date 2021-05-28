@@ -1,5 +1,0 @@
-﻿case_id,title,desc,method,path,params,expect,actual,pre_sql,assert_sql,isAssert
-API001,检查是否注册,可以用来描述接口测试的入参，如：缺少必要参数type,POST,/xxx/checkMbile,"{""mobile"":""0"",""zone"":""86"",""code"":$questionId}",success,,,,
-API002,注册,可以用来描述接口测试的入参，如：缺少必要参数type,POST,/xxx/register,"{""mobile"":""0"",""zone"":""87"",""code"":$questionId}",success,,,,
-API003,登录,可以用来描述接口测试的入参，如：缺少必要参数type,POST,/xxx/login,"{""mobile"":""0"",""zone"":""88"",""code"":$questionId}",success,,,,
-API004,获取信息,可以用来描述接口测试的入参，如：缺少必要参数type,GET,/xxx/getInfo,"{""mobile"":""0"",""zone"":""89"",""code"":$questionId}",success,,,,

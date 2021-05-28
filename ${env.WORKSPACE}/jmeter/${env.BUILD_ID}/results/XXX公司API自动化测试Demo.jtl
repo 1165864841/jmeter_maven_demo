@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testResults version="1.2">
-<sample t="317" it="0" lt="0" ct="0" ts="1622112822231" s="true" lb="检查是否注册" rc="" rm="" tn="API自动化执行用例 1-1" dt="text" by="7" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+<sample t="224" it="0" lt="0" ct="0" ts="1622169095793" s="true" lb="检查是否注册" rc="" rm="" tn="API自动化执行用例 1-1" dt="text" by="7" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
   <responseHeader class="java.lang.String"></responseHeader>
   <requestHeader class="java.lang.String"></requestHeader>
   <responseData class="java.lang.String">success</responseData>
   <responseFile class="java.lang.String"></responseFile>
 </sample>
-<sample t="129" it="0" lt="0" ct="0" ts="1622112822555" s="true" lb="检查是否注册" rc="" rm="" tn="API自动化执行用例 1-1" dt="text" by="7" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
+<sample t="197" it="0" lt="0" ct="0" ts="1622169096027" s="true" lb="检查是否注册" rc="" rm="" tn="API自动化执行用例 1-1" dt="text" by="7" sby="0" sc="1" ec="0" ng="1" na="1" hn="DESKTOP-TJK6KB0">
   <assertionResult>
     <name>BeanShell断言</name>
     <failure>false</failure>

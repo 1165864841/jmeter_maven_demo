@@ -90,7 +90,6 @@
 				<configuration>
 
 					<!--报告文件尾部输出时间 -->
-
 					<!-- 默认报告优化，修改jmeter.properties配置 -->
 					<propertiesJMeter>
 						<log_level.jmeter>DEBUG</log_level.jmeter>
@@ -149,6 +148,8 @@
 				</executions>
 			</plugin>
 
+			<!-- 打包所有src文件及maven所有依赖都导出到jmeter依赖环境lib和ext -->
+			<!-- 这里不能注释，不然不会编译java文件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -157,9 +158,9 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
-					<compilerArguments>
-						<extdirs>${project.build.directory}/jmeter/lib</extdirs>
-					</compilerArguments>
+					<!-- 可以不指定编译路径 -->
+					<!-- <compilerArguments> <extdirs>${project.build.directory}/jmeter/lib</extdirs> 
+						</compilerArguments> -->
 				</configuration>
 			</plugin>
 
@@ -203,9 +204,7 @@
 				</executions>
 				<configuration>
 					<transformationSets>
-
 						<!-- 可以根据不同的模版，同时生成多个报告 -->
-
 						<transformationSet>
 							<dir>${jmeter.result.jtl.dir}</dir>
 							<stylesheet>src\test\resources\jmeter-results-detail-report_30.xsl</stylesheet>
@@ -217,7 +216,6 @@
 								</fileMapper>
 							</fileMappers>
 						</transformationSet>
-
 
 						<transformationSet>
 							<dir>${jmeter.result.jtl.dir}</dir>
@@ -242,51 +240,84 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+
+			<!-- 这个是将maven所有依赖copy到jmeter运行环境 -->
+			<!-- 可以不要 -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<version>3.1.1</version> <executions> <execution> <id>copy-dependencies</id> 
+				<phase>install</phase> <goals> <goal>copy-dependencies</goal> </goals> <configuration> 
+				<outputDirectory>${project.build.directory}/jmeter/lib/ext</outputDirectory> 
+				<overWriteReleases>false</overWriteReleases> <overWriteSnapshots>false</overWriteSnapshots> 
+				<overWriteIfNewer>true</overWriteIfNewer> <excludeTransitive>false</excludeTransitive> 
+				</configuration> </execution> </executions> </plugin> -->
+
+			<!-- 打包 -->
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> 
+				<version>3.0.2</version> <configuration> -->
+			<!-- 指定打包的jar包输出路径 -->
+			<!-- <outputDirectory> ${project.build.directory}/jmeter/lib/ext </outputDirectory> -->
+			<!-- 不打入jar包的文件类型或者路径 -->
+			<!-- <excludes> <exclude>${project.build.directory}/src/test/*/*.*</exclude> 
+				</excludes> <archive> <manifest> <addClasspath>true</addClasspath> <classpathPrefix>lib/</classpathPrefix> 
+				<mainClass>jmeterLib</mainClass> </manifest> </archive> </configuration> 
+				</plugin> -->
+
+			<!-- 这个会把所有依赖打成一个jar：即你java依赖的jar也在其中 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<!-- 打包指定目录，就不需要其他copy、remove操作 -->
+					<outputDirectory> ${project.build.directory}/jmeter/lib/ext </outputDirectory>
+					<archive>
+						<manifest>
+							<mainClass>jmeterLib</mainClass> <!-- 指定入口类路径 -->
+						</manifest>
+					</archive>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef> <!-- jar包后缀，生成的jar包形式为：project-1.0-SNAPSHOT-jar-with-dependencies.jar -->
+					</descriptorRefs>
+				</configuration>
+				<!-- 添加此项后，可直接使用mvn package | mvn install -->
+				<!-- 不添加此项，需直接使用mvn package assembly:single -->
 				<executions>
 					<execution>
-						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
+						<id>make-assembly</id>
+						<phase>package</phase>
 						<goals>
-							<goal>copy-dependencies</goal>
+							<goal>single</goal>
 						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/jmeter/lib</outputDirectory>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>false</overWriteSnapshots>
-							<overWriteIfNewer>true</overWriteIfNewer>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<!-- 指定打包的jar包输出路径 -->
-					<outputDirectory>
-						${project.build.directory}/jmeter/lib/ext
-					</outputDirectory>
-					<!--不打入jar包的文件类型或者路径 -->
-					<excludes>
-					</excludes>
 
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>jmeterLib</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
+			<!-- 把jar包拷贝到指定目录位置,maven-assembly-plugin打包位置，不要同一个jar，按需输出 -->
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>package</phase>
+						<configuration>
+							<tasks>
+								<copy todir="${project.build.directory}/jmeter/lib/ext">
+									<fileset dir="${project.build.directory}">
+										<include name="${project.artifactId}-${project.version}.jar" />
+									</fileset>
+								</copy>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>
 		<defaultGoal>clean</defaultGoal>
-
 	</build>
 </project>
