@@ -2,9 +2,9 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 	version="2.0">
 	<xsl:param name="showData" select="'y'" />
-	<xsl:param name="titleReport" select="'接口自动化测试报告'" />
+	<xsl:param name="titleReport" select="'接口测试报告'" />
 	<!--<xsl:param name="titleReport" select="'Load Test Results'"/> -->
-	<xsl:param name="dateReport" select="'date not defined'" />
+	<xsl:param name="dateReport" select="current-dateTime()" />
 
 	<xsl:output method="html" indent="no" encoding="UTF-8"
 		doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -403,22 +403,26 @@
 		</html>
 	</xsl:template>
 
-
 	<xsl:template name="pageHeader">
+		<td align="left">
+			<h1>
+				<xsl:value-of select="$titleReport" />
+			</h1>
+		</td>
 		<table width="100%">
-			<tr>
-				<td align="left">
-					<h1>
-						<xsl:value-of select="$titleReport" />
-					</h1>
-				</td>
-				<td align="right">
-					Date report:
-					<xsl:value-of select="$dateReport" /><!--Designed for use 
-						with <a href="http://jmeter.apache.org/">JMeter</a> and <a href="http://ant.apache.org">Ant</a>. -->
-				</td>
-			</tr>
+			<td align="left">
+				Date report:
+				<xsl:value-of select="$dateReport" />
+			</td>
+			<td align="right">
+				Designed for use with
+				<a href="http://jmeter.apache.org/">JMeter</a>
+				and
+				<a href="http://maven.apache.org">Maven</a>
+				.
+			</td>
 		</table>
+
 		<hr size="1" />
 	</xsl:template>
 

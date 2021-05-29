@@ -13,18 +13,19 @@
 		OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
 		the specific language governing permissions and limitations under the License. -->
 
-	<!-- Stylesheet for processing 2.1 output format test result files To uses 
+	<!-- Stylesheet for processing 3.0 output format test result files To uses 
 		this directly in a browser, add the following to the JTL file as line 2: 
-		<?xml-stylesheet type="text/xsl" href="../extras/jmeter-results-detail-report_21.xsl"?> 
-		and you can then view the JTL in a browser -->
+		<?xml-stylesheet type="text/xsl" href="../extras/jmeter-results-detail-report_30.xsl"?> 
+		and you can then view the JTL in a browser.Edit by ZHC -->
 
 	<xsl:output method="html" indent="yes" encoding="UTF-8"
 		doctype-public="-//W3C//DTD HTML 4.01 Transitional//EN" />
 
 	<!-- Defined parameters (overrideable) -->
 	<xsl:param name="showData" select="'y'" />
-	<xsl:param name="titleReport" select="'接口自动化测试报告'" />
-	<xsl:param name="dateReport" select="'date not defined'" />
+	<xsl:param name="titleReport" select="'接口測試報告'" />
+	<xsl:param name="dateReport" select="current-dateTime()" />
+
 
 	<xsl:template match="testResults">
 		<html>
@@ -59,10 +60,14 @@
 					verdana,arial,helvetica
 					}
 					h3 {
-					margin-bottom: 0.5em; font: bold 115% verdana,arial,helvetica
+					margin-bottom: 0.5em; font: bold 115%
+					verdana,arial,helvetica
 					}
 					.Failure {
 					font-weight:bold; color:red;
+					}
+					.LongTime {
+					font-weight:bold; color:#ff9900;
 					}
 
 
@@ -88,38 +93,44 @@
 					.page_details_expanded
 					{
 					display: block;
-					display/* hide this definition from IE5/6 */: table-row;
+					display/* hide this definition from IE5/6 */:
+					table-row;
 					}
 
 
 				</style>
 				<script language="JavaScript"><![CDATA[
-                           function expand(details_id)
-			   {
-			      
-			      document.getElementById(details_id).className = "page_details_expanded";
-			   }
-			   
-			   function collapse(details_id)
-			   {
-			      
-			      document.getElementById(details_id).className = "page_details";
-			   }
-			   
-			   function change(details_id)
-			   {
-			      if(document.getElementById(details_id+"_image").src.match("expand"))
-			      {
-			         document.getElementById(details_id+"_image").src = "collapse.png";
-			         expand(details_id);
-			      }
-			      else
-			      {
-			         document.getElementById(details_id+"_image").src = "expand.png";
-			         collapse(details_id);
-			      } 
-                           }
-			]]></script>
+	                function expand(details_id)
+				   	{
+				      
+				    	document.getElementById(details_id).className = "page_details_expanded";
+				   	}
+				   
+				   	function collapse(details_id)
+				   	{
+				      
+				      	document.getElementById(details_id).className = "page_details";
+				   	}
+				   
+				   	function change(details_id)
+				   	{
+				   		var _dataType=document.getElementById(details_id+"_image").getAttribute('data-type');
+				      	if(_dataType=='expand')
+				      	{
+				         	<!-- document.getElementById(details_id+"_image").src = "collapse.png";  -->
+				         	document.getElementById(details_id+"_image").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAGUExURSZ0pv///xB+eSAAAAARSURBVAjXY2DABuR/gBA2AAAzpwIvNQARCgAAAABJRU5ErkJggg==";
+				         	expand(details_id);
+				         	document.getElementById(details_id+"_image").setAttribute('data-type','collapse');
+				      	}
+				      	else
+				      	{
+				        	<!-- document.getElementById(details_id+"_image").src = "expand.png"; -->
+				        	document.getElementById(details_id+"_image").src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAGUExURSZ0pv///xB+eSAAAAAWSURBVAjXY2CAAcYGBJL/AULIIjAAAJJrBjcL30J5AAAAAElFTkSuQmCC";
+				         	collapse(details_id);
+				         	document.getElementById(details_id+"_image").setAttribute('data-type','expand');
+				      	} 
+	                }
+				]]></script>
 			</head>
 			<body>
 
@@ -138,24 +149,25 @@
 	</xsl:template>
 
 	<xsl:template name="pageHeader">
-		<h1>
-			<xsl:value-of select="$titleReport" />
-		</h1>
+		<td align="left">
+			<h1>
+				<xsl:value-of select="$titleReport" />
+			</h1>
+		</td>
 		<table width="100%">
-			<tr>
-				<td align="left">
-					Date report:
-					<xsl:value-of select="$dateReport" />
-				</td>
-				<td align="right">
-					Designed for use with
-					<a href="http://jmeter.apache.org/">JMeter</a>
-					and
-					<a href="http://ant.apache.org">Ant</a>
-					.
-				</td>
-			</tr>
+			<td align="left">
+				Date report:
+				<xsl:value-of select="$dateReport" />
+			</td>
+			<td align="right">
+				Designed for use with
+				<a href="http://jmeter.apache.org/">JMeter</a>
+				and
+				<a href="http://maven.apache.org">Maven</a>
+				.
+			</td>
 		</table>
+
 		<hr size="1" />
 	</xsl:template>
 
@@ -165,11 +177,14 @@
 			cellspacing="2" width="95%">
 			<tr valign="top">
 				<th># Samples</th>
+				<th>Success</th>
 				<th>Failures</th>
 				<th>Success Rate</th>
 				<th>Average Time</th>
 				<th>Min Time</th>
 				<th>Max Time</th>
+				<th>90% Line</th>
+				<th>QPS</th>
 			</tr>
 			<tr valign="top">
 				<xsl:variable name="allCount" select="count(/testResults/*)" />
@@ -190,17 +205,37 @@
 						<xsl:with-param name="nodes" select="/testResults/*/@t" />
 					</xsl:call-template>
 				</xsl:variable>
-				<xsl:attribute name="class">
-				<xsl:choose>
-					<xsl:when test="$allFailureCount &gt; 0">Failure</xsl:when>
-				</xsl:choose>
-			</xsl:attribute>
+				<!-- New add 90% line -->
+				<xsl:variable name="allLineTime">
+					<xsl:call-template name="lineTime">
+						<xsl:with-param name="nodes" select="/testResults/*/@t" />
+					</xsl:call-template>
+				</xsl:variable>
+				<!-- 将毫秒转换成秒 -->
+				<xsl:variable name="qps" select="$allCount * 1000 div $allTotalTime" />
+				<!-- <xsl:attribute name="class"> <xsl:choose> <xsl:when test="$allFailureCount 
+					&gt; 0">Failure</xsl:when> </xsl:choose> </xsl:attribute> -->
 				<td align="center">
 					<xsl:value-of select="$allCount" />
 				</td>
 				<td align="center">
-					<xsl:value-of select="$allFailureCount" />
+					<xsl:value-of select="$allSuccessCount" />
 				</td>
+				<xsl:choose>
+					<xsl:when test="$allFailureCount &gt; 0">
+						<td align="center" style="font-weight:bold">
+							<font color="red">
+								<xsl:value-of select="$allFailureCount" />
+							</font>
+						</td>
+					</xsl:when>
+					<xsl:otherwise>
+						<td align="center">
+							<xsl:value-of select="$allFailureCount" />
+						</td>
+					</xsl:otherwise>
+				</xsl:choose>
+
 				<td align="center">
 					<xsl:call-template name="display-percent">
 						<xsl:with-param name="value" select="$allSuccessPercent" />
@@ -221,6 +256,16 @@
 						<xsl:with-param name="value" select="$allMaxTime" />
 					</xsl:call-template>
 				</td>
+				<td align="center">
+					<xsl:call-template name="display-time">
+						<xsl:with-param name="value" select="$allLineTime" />
+					</xsl:call-template>
+				</td>
+				<td align="center">
+					<xsl:call-template name="display-qps">
+						<xsl:with-param name="value" select="$qps" />
+					</xsl:call-template>
+				</td>
 			</tr>
 		</table>
 	</xsl:template>
@@ -232,14 +277,21 @@
 			<tr valign="top">
 				<th>URL</th>
 				<th># Samples</th>
+				<th>Success</th>
 				<th>Failures</th>
 				<th>Success Rate</th>
 				<th>Average Time</th>
 				<th>Min Time</th>
 				<th>Max Time</th>
+				<th>90% Line</th>
+				<th>QPS</th>
 				<th></th>
 			</tr>
 			<xsl:for-each select="/testResults/*[not(@lb = preceding::*/@lb)]">
+				<!-- 按平均时间排序 -->
+				<xsl:sort
+					select="sum(../*[@lb = current()/@lb]/@t) div count(../*[@lb = current()/@lb])"
+					data-type="number" order="descending" />
 				<xsl:variable name="label" select="@lb" />
 				<xsl:variable name="count" select="count(../*[@lb = current()/@lb])" />
 				<xsl:variable name="failureCount"
@@ -259,13 +311,34 @@
 						<xsl:with-param name="nodes" select="../*[@lb = current()/@lb]/@t" />
 					</xsl:call-template>
 				</xsl:variable>
+				<!-- new add 90% line time -->
+				<xsl:variable name="nintyTime">
+					<xsl:call-template name="lineTime">
+						<xsl:with-param name="nodes" select="../*[@lb = current()/@lb]/@t" />
+					</xsl:call-template>
+				</xsl:variable>
+				<xsl:variable name="qpsTime" select="$count * 1000 div $totalTime" />
 				<tr valign="top">
-					<xsl:attribute name="class">
 					<xsl:choose>
-						<xsl:when test="$failureCount &gt; 0">Failure</xsl:when>
+						<!-- 失败用例标红显示 -->
+						<xsl:when test="$failureCount &gt; 0">
+							<xsl:attribute name="class">
+							<xsl:choose>
+								<xsl:when test="$failureCount &gt; 0">Failure</xsl:when>
+							</xsl:choose>
+						</xsl:attribute>
+						</xsl:when>
+						<!-- 平均时间超过2s，标色显示 -->
+						<xsl:when test="$averageTime &gt; 2000">
+							<xsl:attribute name="class">
+							<xsl:choose>
+								<xsl:when test="$averageTime &gt; 2000">LongTime</xsl:when>
+							</xsl:choose>
+						</xsl:attribute>
+						</xsl:when>
 					</xsl:choose>
-				</xsl:attribute>
-					<td>
+					<!-- 用例标题，向左对齐 -->
+					<td align="left">
 						<xsl:if test="$failureCount > 0">
 							<a>
 								<xsl:attribute name="href">#<xsl:value-of
@@ -281,33 +354,51 @@
 						<xsl:value-of select="$count" />
 					</td>
 					<td align="center">
+						<xsl:value-of select="$successCount" />
+					</td>
+					<td align="center">
 						<xsl:value-of select="$failureCount" />
 					</td>
-					<td align="right">
+					<td align="center">
 						<xsl:call-template name="display-percent">
 							<xsl:with-param name="value" select="$successPercent" />
 						</xsl:call-template>
 					</td>
-					<td align="right">
+					<td align="center">
 						<xsl:call-template name="display-time">
 							<xsl:with-param name="value" select="$averageTime" />
 						</xsl:call-template>
 					</td>
-					<td align="right">
+					<td align="center">
 						<xsl:call-template name="display-time">
 							<xsl:with-param name="value" select="$minTime" />
 						</xsl:call-template>
 					</td>
-					<td align="right">
+					<td align="center">
 						<xsl:call-template name="display-time">
 							<xsl:with-param name="value" select="$maxTime" />
 						</xsl:call-template>
 					</td>
+					<!-- Page页面添加90% LineTime -->
 					<td align="center">
-						<a href="">
+						<xsl:call-template name="display-time">
+							<xsl:with-param name="value" select="$nintyTime" />
+						</xsl:call-template>
+					</td>
+					<td align="center">
+						<xsl:call-template name="display-qps">
+							<xsl:with-param name="value" select="$qpsTime" />
+						</xsl:call-template>
+					</td>
+					<td align="center">
+						<a href="javascript:void(0)">
 							<xsl:attribute name="href"><xsl:text />javascript:change('page_details_<xsl:value-of
 								select="position()" />')</xsl:attribute>
-							<img src="expand.png" alt="expand/collapse">
+							<!-- <img src="expand.png" alt="expand/collapse"><xsl:attribute name="id"><xsl:text/>page_details_<xsl:value-of 
+								select="position()" />_image</xsl:attribute></img> -->
+							<img data-type="expand"
+								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAGUExURSZ0pv///xB+eSAAAAAWSURBVAjXY2CAAcYGBJL/AULIIjAAAJJrBjcL30J5AAAAAElFTkSuQmCC"
+								alt="expand/collapse">
 								<xsl:attribute name="id"><xsl:text />page_details_<xsl:value-of
 									select="position()" />_image</xsl:attribute>
 							</img>
@@ -337,17 +428,17 @@
 
 								<xsl:for-each select="../*[@lb = $label and @tn != $label]">
 									<tr>
-										<td>
+										<td align="center">
 											<xsl:value-of select="@tn" />
 										</td>
 										<td align="center">
 											<xsl:value-of select="position()" />
 										</td>
-										<td align="right">
+										<td align="center">
 											<xsl:value-of select="@t" />
 										</td>
 										<!-- TODO allow for missing bytes field -->
-										<td align="right">
+										<td align="center">
 											<xsl:value-of select="@by" />
 										</td>
 										<td align="center">
@@ -355,12 +446,10 @@
 										</td>
 									</tr>
 								</xsl:for-each>
-
 							</table>
 						</div>
 					</td>
 				</tr>
-
 			</xsl:for-each>
 		</table>
 	</xsl:template>
@@ -386,13 +475,13 @@
 						</a>
 					</h3>
 
-					<table align="center" class="details" border="0" cellpadding="5"
+					<table class="details" border="0" cellpadding="5"
 						cellspacing="2" width="95%">
 						<tr valign="top">
-							<th>Response</th>
-							<th>Failure Message</th>
+							<th align="center">Response</th>
+							<th align="center">Failure Message</th>
 							<xsl:if test="$showData = 'y'">
-								<th>Response Data</th>
+								<th align="left">Response Data</th>
 							</xsl:if>
 						</tr>
 
@@ -409,7 +498,7 @@
 								</td>
 								<xsl:if test="$showData = 'y'">
 									<td>
-										<xsl:value-of select="./binary" />
+										<xsl:value-of select="responseData" />
 									</td>
 								</xsl:if>
 							</tr>
@@ -456,6 +545,39 @@
 		</xsl:choose>
 	</xsl:template>
 
+	<!-- 90% line time -->
+	<xsl:template name="lineTime">
+		<xsl:param name="nodes" select="/.." />
+		<xsl:choose>
+			<xsl:when test="not($nodes)">
+				NaN
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:for-each select="$nodes">
+					<xsl:sort data-type="number" />
+					<!-- last() 返回当前上下文中的最后一个节点位置数 -->
+					<!-- ceiling(number) 返回大于number的最小整数 -->
+					<!-- floor(number) 返回不大于number的最大整数 -->
+					<!-- position() 返回当前节点位置的数字 -->
+					<!-- number(object) 使对象转换成数字 -->
+					<xsl:choose>
+						<!-- 当只有一个节点时，向上取整 -->
+						<xsl:when test="last() = 1">
+							<xsl:if test="position() = ceiling(last()*0.9)">
+								<xsl:value-of select="number(.)" />
+							</xsl:if>
+						</xsl:when>
+						<xsl:otherwise>
+							<xsl:if test="position() = floor(last()*0.9)">
+								<xsl:value-of select="number(.)" />
+							</xsl:if>
+						</xsl:otherwise>
+					</xsl:choose>
+				</xsl:for-each>
+			</xsl:otherwise>
+		</xsl:choose>
+	</xsl:template>
+
 	<xsl:template name="display-percent">
 		<xsl:param name="value" />
 		<xsl:value-of select="format-number($value,'0.00%')" />
@@ -465,5 +587,11 @@
 		<xsl:param name="value" />
 		<xsl:value-of select="format-number($value,'0 ms')" />
 	</xsl:template>
+
+	<xsl:template name="display-qps">
+		<xsl:param name="value" />
+		<xsl:value-of select="format-number($value,'0.000 /s')" />
+	</xsl:template>
+
 
 </xsl:stylesheet>

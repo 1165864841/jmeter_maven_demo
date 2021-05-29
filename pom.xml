@@ -17,7 +17,7 @@
 		<jmeter.result.jtl.dir>${env.WORKSPACE}/jmeter/${env.BUILD_ID}/results</jmeter.result.jtl.dir>
 		<jmeter.result.details.dir>${env.WORKSPACE}/jmeter/${env.BUILD_ID}/details</jmeter.result.details.dir>
 		<jmeter.result.summary.dir>${env.WORKSPACE}/jmeter/${env.BUILD_ID}/summary</jmeter.result.summary.dir>
-		<ReportName>接口自动化测试</ReportName>
+		<ReportName>xxx接口自动化测试</ReportName>
 	</properties>
 
 
@@ -234,7 +234,7 @@
 						<!-- 可以根据不同的模版，同时生成多个报告 -->
 						<transformationSet>
 							<dir>${jmeter.result.jtl.dir}</dir>
-							<stylesheet>src\test\resources\jmeter-results-detail-report_30.xsl</stylesheet>
+							<stylesheet>src\test\resources\jmeter-results-summary-report_mvn.xsl</stylesheet>
 							<outputDir>${jmeter.result.summary.dir}</outputDir>
 							<fileMappers>
 								<fileMapper
